@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="bt5.DanhsachCD"/>
+    <fullyQualifiedTypeName name="quanlysinhvien.demo.DanhSachSinhVien"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="java.time.DateTimeException"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalAccessException"/>
+    <fullyQualifiedTypeName name="chuong3.HangThucPham"/>
+    <fullyQualifiedTypeName name="chuong3.HangHoa"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
+    <fullyQualifiedTypeName name="quanlysinhvien.demo.SinhVien"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalAccessError"/>
+    <fullyQualifiedTypeName name="java.time.temporal.ChronoUnit"/>
+    <fullyQualifiedTypeName name="quanlybenhnhan.GioiTinh"/>
+    <fullyQualifiedTypeName name="quanlybenhnhan.BenhNhan"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
+    <fullyQualifiedTypeName name="quanlybenhnhan.DanhSachBenhNhan"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterEach"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+    <fullyQualifiedTypeName name="project_quanlysinhvien.demo.DanhSachSinhVien"/>
+    <fullyQualifiedTypeName name="project_quanlysinhvien.demo.GioiTinh"/>
+    <fullyQualifiedTypeName name="project_quanlysinhvien.demo.HeDaoTao"/>
+    <fullyQualifiedTypeName name="project_quanlysinhvien.demo.SinhVien"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,18 @@
+package dictionary;
+
+public class Main {
+	public static void main(String[] args) {
+		Dictionary d = new Dictionary();
+		d.addWord("Dog", "con cho");
+		d.addWord("cat", "Con meo");
+		d.addWord("Car", "xe o to");
+		d.addWord("abc", "Con meo");
+		System.out.println();
+		
+		d.updateWord("abc", "con cho");
+		System.out.println(d.searchWord("cat"));
+	}
+	
+	
+
+}

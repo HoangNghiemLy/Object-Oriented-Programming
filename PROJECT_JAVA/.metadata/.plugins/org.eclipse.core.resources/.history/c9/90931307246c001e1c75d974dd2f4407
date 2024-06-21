@@ -1,0 +1,150 @@
+package quanlysinhvien.demo;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Tester {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		DanhSachSinhVien sv = new DanhSachSinhVien(1);
+		SinhVien[] f = { new SinhVien("", "Ly Hoang Nghiem", LocalDate.of(2004, 6, 2), 9.8, "DHHTTT18BTT"),
+				new SinhVien("SV002", "Nguyen Duc Huy", LocalDate.of(2004, 10, 10), 10, "DHHTTT18BTT"),
+				new SinhVien("SV003", "Tran Chi An", LocalDate.of(2004, 8, 02), 6.9, "DHKTPM18ATT"), };
+		sv.addAll(f);
+
+		while (true) {
+			System.out.println("===Chuong trinh quan ly sinh vien===");
+			System.out.println("1. Them sinh vien");
+			System.out.println("2. Xuat danh sach sinh vien");
+			System.out.println("3. Tim kiem sinh vien theo ma sinh vien");
+			System.out.println("4. Xoa sinh vien theo ma sinh vien");
+			System.out.println("5. Sap xep danh sach sinh vien giam dan theo diem trung binh");
+			System.out.println("6. Sap xep danh sach sinh vien tang dan theo ten");
+			System.out.println("7. Cap nhat sinh vien theo ma so sinh vien");
+			System.out.println("8. Tinh so luong sinh vien co trong danh sach");
+			System.out.println("0. Thoat chuong trinh");
+			System.out.println("Moi nhap lua chon: ");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			if (choice == 1) {
+				System.out.println("Nhap so luong sinh vien: ");
+				int n = sc.nextInt();
+				sc.nextLine();
+				System.out.println();
+				for (int i = 0; i < n; i++) {
+					System.out.println("Nhap sinh vien thu " + (i + 1) + ":");
+					System.out.println("Nhap ma sinh vien: ");
+					String id = sc.nextLine();
+					System.out.println("Nhap ten sinh vien: ");
+					String name = sc.nextLine();
+
+					LocalDate dob = null;
+					try {
+						System.out.println("Day: ");
+						int day = sc.nextInt();
+						System.out.println("Month: ");
+						int month = sc.nextInt();
+						System.out.println("Year: ");
+						int year = sc.nextInt();
+						dob = dob.of(year, month, day);
+					} catch (DateTimeException e) {
+						System.out.println("Loi nhap ngay thang nam sinh");
+					}
+					System.out.println("Nhap diem trung binh: ");
+					double avg = sc.nextDouble();
+					sc.nextLine();
+					System.out.println("Nhap ten lop: ");
+					String tenLop = sc.nextLine();
+					SinhVien a = new SinhVien(id, name, dob, avg, tenLop);
+					sv.themSinhVien(a);
+					System.out.println();
+					System.out.println("Them thanh cong!!!");
+					System.out.println();
+				}
+			} else if (choice == 2) {
+
+				Arrays.stream(sv.getDanhSachSinhVien()).forEach(System.out::println);
+				System.out.println();
+			} else if (choice == 3) {
+				System.out.println("Nhap ma sinh vien can tim: ");
+				String fid = sc.nextLine();
+				SinhVien e = sv.search(fid);
+				if (e != null) {
+					System.out.println(e);
+					System.out.println();
+				} else {
+					System.out.println("Khong tim thay sinh vien");
+					System.out.println();
+				}
+			} else if (choice == 4) {
+				System.out.println("Nhap ma can xoa: ");
+				String maxoa = sc.nextLine();
+				SinhVien a = sv.search(maxoa);
+				if (a != null) {
+					sv.xoaNhanVien(maxoa);
+					System.out.println("Xoa thanh cong ma sinh vien " + maxoa);
+					System.out.println();
+				} else {
+					System.out.println("Khong tim thay ma sinh vien "+maxoa+". Xoa khong thanh cong ma sinh vien " + maxoa);
+					System.out.println();
+				}
+			}else if(choice == 5) {
+				sv.SapXepGiamDanTheoDiemTrungBinh();
+				Arrays.stream(sv.getDanhSachSinhVien()).forEach(System.out::println);
+				System.out.println();
+			}else if(choice == 6) {
+				sv.SapXepTheoTen();
+				Arrays.stream(sv.getDanhSachSinhVien()).forEach(System.out::println);
+				System.out.println();
+			}else if(choice == 7) {
+				System.out.println("Nhap ma so sinh vien can cap nhat: ");
+				String ms = sc.nextLine();
+				SinhVien e =sv.search(ms);
+				if(e == null) {
+					System.out.println("Khong tim thay ma so sinh vien de cap nhat");
+				}else {
+					System.out.println("Nhap ten sinh vien: ");
+					String name = sc.nextLine();
+
+					LocalDate dob = null;
+					try {
+						System.out.println("Day: ");
+						int day = sc.nextInt();
+						System.out.println("Month: ");
+						int month = sc.nextInt();
+						System.out.println("Year: ");
+						int year = sc.nextInt();
+						dob = dob.of(year, month, day);
+					} catch (DateTimeException d) {
+						System.out.println("Loi nhap ngay thang nam sinh");
+					}
+					System.out.println("Nhap diem trung binh: ");
+					double avg = sc.nextDouble();
+					sc.nextLine();
+					System.out.println("Nhap ten lop: ");
+					String tenLop = sc.nextLine();
+					SinhVien he = new SinhVien(ms, name, dob, avg, tenLop);
+					sv.CapNhatsinhVien(he);
+					System.out.println("Cap nhat sinh vien co ma so "+ms+" thanh cong");
+					System.out.println();
+				}
+			}
+			else if(choice == 8) {
+				System.out.println("So luong sinh vien co trong danh sach la: "+sv.getSOSV());
+				System.out.println();
+			}
+			else if(choice == 0) {
+				System.out.println("Ket thuc chuong trinh");
+				break;
+			}else {
+				System.out.println("Nhap loi, moi nhap lai");
+				System.out.println();
+			}
+		}
+		sc.close();
+	}
+}

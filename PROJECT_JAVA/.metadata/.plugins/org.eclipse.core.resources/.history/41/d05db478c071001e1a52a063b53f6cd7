@@ -1,0 +1,39 @@
+package project_quanlysinhvien.demo;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+
+public class Test {
+	public static void main(String[] args) {
+		DanhSachSinhVien sv = new DanhSachSinhVien();
+		SinhVien[] f = {
+				new SinhVien("22641571", "ABC", LocalDate.of(2004, 6, 2), 5.5, GioiTinh.Nam, HeDaoTao.Chinh_Quy, "DHKTPM18ATT"),
+				new SinhVien("22641581", "ABC", LocalDate.of(2004, 6, 2), 5, GioiTinh.Nam, HeDaoTao.Chinh_Quy, "DHHTTT18ATT"),
+				new SinhVien("22641589", "ABC", LocalDate.of(2004, 6, 2), 6.5, GioiTinh.Nam, HeDaoTao.Chinh_Quy, "DHKHMT18ATT"),
+				new SinhVien("22645555", "ABC", LocalDate.of(2004, 6, 2), 10, GioiTinh.Nam, HeDaoTao.Chinh_Quy, "DHKHDL18A"),
+				new SinhVien("22645656", "ABC", LocalDate.of(2004, 6, 2), 9.5, GioiTinh.Nam, HeDaoTao.Chinh_Quy, "DHKTPM18ATT"),
+		};
+		
+		sv.ThemMotSinhVien(new SinhVien("22232323", "ABCD", LocalDate.of(2005, 10, 10), 10, GioiTinh.Nu, HeDaoTao.Tu_Xa, "DHMKT19ATT"));
+		sv.addAll(f);
+		Arrays.stream(sv.getDSSV()).forEach(System.out::println);
+		System.out.println();
+		System.out.println("Co "+sv.getN()+" sinh vien trong danh sach");
+		System.out.println();
+		System.out.println("Xoa sinh vien");
+		sv.XoaSinhVienKhiBietMa("22641571");
+		Arrays.stream(sv.getDSSV()).forEach(System.out::println);
+		System.out.println();
+		System.out.println("Sap xep giam dan theo diem trung binh");
+		sv.SapXepGiamDanTheoDiemTB();
+		Arrays.stream(sv.getDSSV()).forEach(System.out::println);
+		System.out.println();
+		sv.indexSV("22641581");
+		Arrays.stream(sv.getDSSV()).forEach(System.out::println);
+
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package quanlybenhnhan;
+
+public enum GioiTinh {
+
+}

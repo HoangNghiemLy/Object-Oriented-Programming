@@ -1,0 +1,58 @@
+/*
+ * @ (#)  PayrollApp.java   2023-06    Sep 26, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlynhanvien;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 26, 2023
+ * @time:		 10:25:26 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class PayrollApp {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Employee[] emps = { new HourlyEmployee("HE001", "John", LocalDate.of(200, 8, 20), 80, 20.0),
+				new HourlyEmployee("HE002", "Jane", LocalDate.of(2002, 1, 30), 50, 20.0),
+				new Manager("MN101", "Bob", LocalDate.of(1992, 6, 2), 52000.0, 50.0),
+				new SalariedEmployee("SE005", "Alice", LocalDate.of(1999, 5, 10), 52000),
+				new SalariedEmployee("MN102", "David", LocalDate.of(1998, 8, 23), 52000), };
+		EmployeeList list = new EmployeeList();
+		list.addAll(emps);
+		int choice;
+		while (true) {
+			System.out.println("===EMPLOYEE MANAGERMENT SYSTEM");
+			System.out.println("1. Display all employees");
+			System.out.println("2. Add a new employee");
+			System.out.println("3. Search employee by id");
+			System.out.println("4. Sort by weekly salary");
+			System.out.println("5. Remove employee by id");
+			System.out.println("6. Update employee by id");
+			System.out.println("7. List hourly employees who work more than 40 hours a week");
+			System.out.println("8. Print the total weekly salary of all managers");
+			System.out.println("9. Update hourly worked of hourly employee by id");
+			System.out.println("10.List of employees who are young managers (less than 30 years old)");
+			System.out.println("11.This method returns a map of number of employees by year of birth");
+			System.out.println("0. Exit ");
+			System.out.println("Enter your choice: ");
+			choice = sc.nextInt();
+			sc.nextLine();
+			if (choice == 1) {
+				list.getEmployees().forEach(x -> System.out.println(x));
+			}
+
+		}
+	}
+}

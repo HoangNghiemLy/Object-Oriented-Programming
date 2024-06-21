@@ -1,0 +1,90 @@
+package quanlysinhvien.demo;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class DanhSachSinhVien {
+	private SinhVien[] dsSV;
+	private int n=0;
+	public DanhSachSinhVien() {
+		this(100);
+	}
+	public DanhSachSinhVien(int sophantu) {
+		dsSV = new SinhVien[sophantu];
+		this.n = 0;
+	}
+	
+	/*
+	 *Phuong thuc them 1 sinh vien vao danh sach, them thanh cong neu khong trung ma SV va kich thuoc mang cho phep
+	 *Neu mang day tang len 1.75 
+	 */
+	
+	public void themSinhVien(SinhVien sv) {
+		int i = Arrays.binarySearch(dsSV, 0,n,sv,Comparator.comparing(SinhVien::getId));
+		if(i>=0)
+			throw new IllegalArgumentException("Trung ma SV");
+		if(n==dsSV.length) {
+			int newLength = (int)Math.ceil(dsSV.length*1.75);
+			dsSV = Arrays.copyOf(dsSV, newLength);
+		}
+		dsSV[n++] = sv;
+		
+	}
+	public SinhVien[] getdsSV() {
+		return dsSV;
+	}
+	/*
+	 * Tinh so luong sinh vien co trong danh sach
+	 */
+	public int getSOSV() {
+		return n;
+	}
+	/*
+	 * Tim kiem sinh vien theo ma sinh vien
+	 */
+	public SinhVien search(String id) {
+		for (SinhVien sinhVien : dsSV) {
+			if(sinhVien.getId().equalsIgnoreCase(id)) {
+				return sinhVien;
+			}
+		}
+		return null;
+	}
+	/*
+	 * Xoa sinh vien khi biet ma	
+	 */
+	public void xoaNhanVien(String id) {
+		if(search(id)==null)
+			return;
+		this.dsSV = Arrays.stream(dsSV,0,n)
+				.filter(x -> x.getId() != id)
+				.toArray(SinhVien[]::new);
+		this.n--;
+	}
+	/*
+	 * Sap xep giam dan theo diem trung binh 
+	 */
+	public void SapXepGiamDanTheoDiemTrungBinh() {
+		Arrays.sort(dsSV,0,n,Comparator.comparing(SinhVien::getDiemTB).reversed());
+	}
+	/*
+	 * Sap xep tang dan theo ho va ten
+	 */
+	public void SapXepTangDanTheoten() {
+		Arrays.sort(dsSV,0,n,Comparator.comparing(SinhVien::getHoten));
+	}
+	/*
+	 * Phuong thuc addAll
+	 */
+	public void addAll(SinhVien[] dssv) {
+		for (SinhVien sinhVien : dssv) {
+			themSinhVien(sinhVien);
+		}
+	}
+	/*
+	 * Lay danh sach sinh vien
+	 */
+	public SinhVien[] getDanhSachSinhVien() {
+		return Arrays.copyOf(dsSV, n);
+	}
+}

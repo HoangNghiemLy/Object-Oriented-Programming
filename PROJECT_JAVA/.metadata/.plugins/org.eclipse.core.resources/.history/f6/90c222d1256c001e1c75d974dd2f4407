@@ -1,0 +1,133 @@
+package quanlysinhvien.demo;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class DanhSachSinhVien {
+	private SinhVien[] dsSV;
+	private int n = 0;
+
+	public DanhSachSinhVien() {
+		this(100);
+	}
+
+	public DanhSachSinhVien(int sophantu) {
+		dsSV = new SinhVien[sophantu];
+		this.n = 0;
+	}
+
+	/*
+	 * Phuong thuc them 1 sinh vien vao danh sach, them thanh cong neu khong trung
+	 * ma SV va kich thuoc mang cho phep Neu mang day tang len 1.75
+	 */
+
+	public void themSinhVien(SinhVien sv) {
+		if (search(sv.getId()) != null)
+			throw new IllegalArgumentException("Trung ma sinh vien");
+
+		if (this.dsSV.length == n) {
+			int newLength = (int) Math.ceil(n * 1.5);
+			dsSV = Arrays.copyOf(dsSV, newLength);
+		}
+		this.dsSV[this.n] = sv;
+		this.n++;
+
+	}
+
+	public SinhVien[] getdsSV() {
+		return dsSV;
+	}
+
+	/*
+	 * Tinh so luong sinh vien co trong danh sach
+	 */
+	public int getSOSV() {
+		return n;
+	}
+
+	/*
+	 * Tim kiem sinh vien theo ma sinh vien
+	 */
+	public SinhVien search(String id) {
+		return Arrays.stream(dsSV, 0, n).filter(x -> x.getId().equals(id)).findFirst().orElse(null);
+	}
+
+	/*
+	 * Xoa sinh vien khi biet ma
+	 */
+	public void xoaNhanVien(String id) {
+		if (search(id) == null)
+			return;
+		this.dsSV = Arrays.stream(dsSV, 0, n).filter(x -> x.getId().equals(id)==false).toArray(SinhVien[]::new);
+		this.n--;
+	}
+
+	/*
+	 * Sap xep giam dan theo diem trung binh
+	 */
+	public void SapXepGiamDanTheoDiemTrungBinh() {
+		Arrays.sort(dsSV, 0, n, Comparator.comparing(SinhVien::getDiemTB).reversed());
+	}
+
+	/*
+	 * Sap xep tang dan theo ho va ten
+	 */
+	public void SapXepTheoTen() {
+		Arrays.sort(dsSV, 0, n, Comparator.comparing((SinhVien::XuLyTen)));
+	}
+	
+
+	/*
+	 * Phuong thuc addAll
+	 */
+	public void addAll(SinhVien[] dssv) {
+		for (SinhVien sinhVien : dssv) {
+			themSinhVien(sinhVien);
+		}
+	}
+
+	/*
+	 * Lay danh sach sinh vien
+	 */
+	public SinhVien[] getDanhSachSinhVien() {
+		return Arrays.copyOf(dsSV, n);
+	}
+	/*
+	 * Phuong thuc trả về index của sinh viên khi biết mã số
+	 */
+	public int indexSV(String id) {
+		for(int i =0;i<n;i++) {
+			if(dsSV[i].getId().equals(id)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	/*
+	 * Phuong thuc cap nhan sinh vien khi biet ma so
+	 */
+	public void CapNhatsinhVien(SinhVien sv) {
+		int index = indexSV(sv.getId());
+		if(index == -1) {
+			throw new IllegalArgumentException("Khong tim thay ma so sinh vien");
+		}
+		dsSV[index] = sv;
+	}
+	
+//	public void capnhatsinhvien(String id, String name, LocalDate dob, double dtb, String tenLop) {
+//		SinhVien svcapnhat = search(id);
+//		if(svcapnhat != null) {
+//			svcapnhat.setHoten(name);
+//			svcapnhat.setDob(dob);
+//			svcapnhat.setDiemTB(dtb);
+//			svcapnhat.setTenLop(tenLop);
+//		}else {
+//			throw new IllegalArgumentException("Khong tim thay ma");
+//		}
+//	}
+	
+	
+	
+	
+}

@@ -1,0 +1,126 @@
+package quanlysinhvien.demo;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class DanhSachSinhVien {
+	private SinhVien[] dsSV;
+	private int n = 0;
+
+	public DanhSachSinhVien() {
+		dsSV = new SinhVien[10];
+		this.n = 0;
+	}
+
+	public DanhSachSinhVien(int k) {
+		if (k <= 0)
+			throw new IllegalArgumentException("So luong du kien phai lon hon 0");
+		dsSV = new SinhVien[k];
+		this.n = 0;
+	}
+	
+	
+	
+	
+
+	public SinhVien[] getDsSV() {
+		return Arrays.copyOf(dsSV,n);
+	}
+
+	public void setDsSV(SinhVien[] dsSV) {
+		this.dsSV = dsSV;
+	}
+
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public SinhVien timKiemSinhVienTheoMa(String maso) {
+		return Arrays.stream(dsSV, 0, n).filter(x -> x.getMssv().equals(maso)).findFirst().orElse(null);
+	}
+
+	public boolean themSinhVien(SinhVien sinhVien) {
+		if (n == dsSV.length) {
+			// Tăng kích thước mảng lên 1.75
+			int newSize = (int) (dsSV.length * 1.75);
+			dsSV = Arrays.copyOf(dsSV, newSize);
+		}
+
+		// Kiểm tra mã số trùng lặp
+		for (int i = 0; i < n; i++) {
+			if (sinhVien.getMssv().equals(dsSV[i].getMssv())) {
+				return false; // Trùng mã số, không thêm được
+			}
+		}
+
+		dsSV[n] = sinhVien;
+		n++;
+		return true; // Thêm thành công
+	}
+
+	public SinhVien[] getDSSVTheoLop(String tenLopCanTim) {
+		// Khởi tạo danh sách kết quả
+		SinhVien[] danhSachKetQua = new SinhVien[n];
+		int count = 0;
+
+		for (int i = 0; i < n; i++) {
+			String tenLopSinhVien = dsSV[i].getTenlop().toLowerCase();
+			if (tenLopSinhVien.contains(tenLopCanTim.toLowerCase())) {
+				danhSachKetQua[count] = dsSV[i];
+				count++;
+			}
+		}
+
+		// Sắp xếp kết quả theo tên và họ
+		Arrays.sort(danhSachKetQua, 0, count, (a, b) -> a.getHoten().compareToIgnoreCase(b.getHoten()));
+
+		return Arrays.copyOf(danhSachKetQua, count);
+	}
+
+	// Trích danh sách những sinh viên có điểm trung bình tích lũy là cao nhất
+	public SinhVien[] getSVDiemTrungBinhCaoNhat() {
+		double maxDiem = -1;
+		for (int i = 0; i < n; i++) {
+			if (dsSV[i].getDiemtb() > maxDiem) {
+				maxDiem = dsSV[i].getDiemtb();
+			}
+		}
+
+		// Khởi tạo danh sách kết quả
+		SinhVien[] danhSachKetQua = new SinhVien[n];
+		int count = 0;
+
+		for (int i = 0; i < n; i++) {
+			if (dsSV[i].getDiemtb() == maxDiem) {
+				danhSachKetQua[count] = dsSV[i];
+				count++;
+			}
+		}
+
+		return Arrays.copyOf(danhSachKetQua, count);
+	}
+
+	// Cập nhật tên lớp mới cho các sinh viên
+	public int capNhatTenLop(String tenLopCu, String tenLopMoi) {
+		int soSinhVienDaCapNhat = 0;
+
+		for (int i = 0; i < n; i++) {
+			if (dsSV[i].getTenlop().equalsIgnoreCase(tenLopCu)) {
+				dsSV[i].setTenlop(tenLopMoi);
+				soSinhVienDaCapNhat++;
+			}
+		}
+
+		return soSinhVienDaCapNhat;
+	}
+	
+	public void addAll(SinhVien[] k) {
+		for (SinhVien sinhVien : k) {
+			themSinhVien(sinhVien);
+		}
+	}
+}

@@ -1,0 +1,82 @@
+package iuh.fit.se;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class DanhSachPhongHoc {
+	private List<PhongHoc> ds;
+
+	/**
+	 * @param ds
+	 */
+	public DanhSachPhongHoc() {
+		this.ds = new ArrayList<PhongHoc>();
+	}
+
+	public List<PhongHoc> getDs() {
+		return ds;
+	}
+
+	public void setDs(List<PhongHoc> ds) {
+		this.ds = ds;
+	}
+	public boolean themPhongHoc(PhongHoc ph) {
+		if(ph == null)
+			return false;
+		if(ds.contains(ph))
+			return false;
+		return ds.add(ph);
+	}
+	public PhongHoc timKiemPhongHoc(String ma) {
+		return ds.stream().filter(ph -> ph.getMaPhong().equalsIgnoreCase(ma)).findFirst().orElse(null);
+	}
+	public List<PhongHoc> inDanhSachPhongHocDatChuan(){
+		return ds.stream()
+				.filter(ph -> ph.datChuan())
+				.collect(Collectors.toList());
+	}
+//	public List<PhongHoc> inDanhSachPhongHocDatChuan(){
+//		ArrayList<PhongHoc> ds1 = new ArrayList<PhongHoc>(ds);
+//		ds.stream().filter(ph -> (double)ph.getDienTich()/ph.getSoBongDen()<=10).filter(ph -> ph instanceof PhongLyThuyet && ((PhongLyThuyet)ph).getMayChieu()==1||ph instanceof PhongMayTinh&&  (double)ph.getDienTich()/((PhongMayTinh)ph).getSoLuongMayTinh()<=1.5||ph instanceof PhongThiNghiem&&((PhongThiNghiem)ph).getBonRua()==1).forEach(ph -> ds1.add(ph));
+//		return ds1;
+//	}
+	public void sapXepTheoDayNha() {
+		ds.sort(Comparator.comparing(PhongHoc::getMaPhong));
+	}
+	public void sapXepTheoDienTich() {
+		ds.sort(Comparator.comparingDouble(PhongHoc::getDienTich).reversed());
+	}
+	public void sapXepTheoSoBongDen() {
+		ds.sort(Comparator.comparingInt(PhongHoc::getSoBongDen));
+	}
+	public boolean capNhatSoMayTinh(String ma, int smt) {
+		PhongHoc ph = timKiemPhongHoc(ma);
+		if(ph==null||!(ph instanceof PhongMayTinh))
+			return false;
+		if(smt < 0)
+			return false;
+//		((PhongMayTinh)ds.set(ds.indexOf(ph),ph)).setSoLuongMayTinh(smt);
+		PhongMayTinh temp = (PhongMayTinh) ph;
+		temp.setSoLuongMayTinh(smt);
+		return true;
+		
+	}
+	public boolean xoaPhongHoc(String ma) {
+		PhongHoc ph = timKiemPhongHoc(ma);
+		if(ph == null)
+			return false;
+		return ds.remove(ph);
+	}
+	public int inTongSoPhongHoc() {
+		return ds.size();
+	}
+	
+	public List<PhongHoc> getDSPhongMayTinh(int soMay) {
+		return ds.stream()
+				.filter(ph -> (ph instanceof PhongMayTinh && ((PhongMayTinh)ph).getSoLuongMayTinh() == soMay))
+				.collect(Collectors.toList());
+						
+	}
+}

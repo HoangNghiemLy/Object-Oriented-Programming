@@ -1,0 +1,164 @@
+package quanlythongtinnhanvien;
+
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class EmployeeList {
+	//trường dữ liệu
+	private Employee[] nhanVien;
+	private int soLuongHienTai;
+	private int soLuongDuKien;
+	//constructor
+	public EmployeeList() {
+		this.soLuongDuKien = 10;
+		this.soLuongHienTai = 0;
+		this.nhanVien = new Employee[10];
+	}
+	public EmployeeList(int soLuongDuKien) {
+		this.nhanVien = new Employee[soLuongDuKien];
+		this.soLuongHienTai = 0;
+	}
+	//tăng số lượng mảng lưu cho nhân viên
+	public void grow() {
+		if(soLuongDuKien == soLuongHienTai) {
+			int newLength = (int)(nhanVien.length*1.5);
+			nhanVien = Arrays.copyOf(nhanVien, newLength);
+			this.soLuongDuKien = newLength;
+		}
+	}
+	
+	//lấy danh sách các nhân viên
+	public Employee[] getEmployee() {
+		return this.nhanVien;
+	}
+	//thêm nhân viên
+	public void addEmployee(Employee h) {
+		int i = Arrays.binarySearch(nhanVien, 0, soLuongHienTai, h, Comparator.comparing(Employee::getId));
+		if(i>=0) {
+			throw new IllegalArgumentException("Trùng mã nhân viên");
+		}
+		
+		if(soLuongDuKien == soLuongHienTai) {
+			int newLength = (int)(nhanVien.length*1.5);
+			nhanVien = Arrays.copyOf(nhanVien, newLength);
+			this.soLuongDuKien = newLength;
+		}
+		
+		this.nhanVien[this.soLuongHienTai] = h;
+		this.soLuongHienTai++;
+	}
+	//trả về chỉ số mục cho nhân viên
+	public int indexOfEmployee(String id) {
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(id.equals(this.nhanVien[i].getId())==true) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	//tìm kiếm nhân viên bằng mã id
+	public Employee searchEmployeeByID(String id) {
+		int k = indexOfEmployee(id);
+		if(k<0) return null;
+		return this.nhanVien[k];
+	}
+
+	//thêm danh sách các nhân viên vào đây
+	public void addAll(Employee[] emps) {
+		for (Employee employee : emps) {
+			if(employee!=null) {
+				Employee j = employee;
+				int i = Arrays.binarySearch(emps, 0 ,emps.length, j, Comparator.comparing(Employee::getId));
+				if(i<0) {
+					addEmployee(j);
+				}
+			}
+		}
+	}
+	//sắp xếp tăng dần theo lương
+	public void sortByWeeklySalary() {
+		Arrays.sort(this.nhanVien, 0, this.soLuongHienTai, Comparator.comparing(Employee::weeklyPay));
+	}
+	//loại bỏ nhân viên theo id
+	public void removeEmployee(String id) {
+		int dem = 0;
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(this.nhanVien[i].getId().equals(id)==true) {
+				++dem;
+				for(int j=i;j<this.soLuongHienTai-1;j++) {
+					nhanVien[j] = nhanVien[j+1];
+				}
+				--i;
+				--this.soLuongHienTai;
+			}
+		}
+		if(dem==0) System.out.println("No employee have id: "+ id);
+	}
+	//cập nhật id bằng nhân viên
+	public void updateEmployee(Employee newinfo) {
+		int z = Arrays.binarySearch(this.nhanVien, 0 , this.soLuongHienTai, newinfo, Comparator.comparing(Employee::getId));
+		if(z >= 0) {
+			nhanVien[z] = newinfo;
+		}
+		else {
+			throw new IllegalArgumentException("Không tìm thấy");
+		}
+	}
+	
+	public Employee[] getHourlyEmpsWorkMoreThan40() {
+		int dem = 0;
+		Employee[] ds = new Employee[this.soLuongDuKien];
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(this.nhanVien[i] instanceof HourlyEmployee) {
+				if(((HourlyEmployee)this.nhanVien[i]).getHoursWorked()*7 > 40) {
+					ds[dem] = nhanVien[i];
+					++dem;
+				}
+			}
+		}
+		if(dem!=0) return ds;
+		return null;
+	}
+	
+	public double getWeeklyTotalSalaryOfManager() {
+		double sum = 0;
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(this.nhanVien[i] instanceof Manager) sum += this.nhanVien[i].weeklyPay();
+		}
+		return sum;
+	}
+	
+	public void updateHourlyWorked(String id, int newHour) {
+		
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(id.equals(this.nhanVien[i].getId())==true) {
+				if(this.nhanVien[i] instanceof HourlyEmployee) {
+					((HourlyEmployee)this.nhanVien[i]).setHoursWorked(newHour);
+				}
+			}
+		}
+		
+	}
+	
+	public int getSoLuongHienTai() {
+		return soLuongHienTai;
+	}
+	
+	public Employee[] getYoungEmployeesAsManagers() {
+		Employee[] s = new Employee[this.soLuongDuKien];
+		int dem = 0;
+		for(int i=0;i<this.soLuongHienTai;i++) {
+			if(2023-this.nhanVien[i].getDob().getYear()  < 30) {
+				s[dem] = this.nhanVien[i];
+				++dem;
+			}
+		}
+		
+		if(dem!=0) return s;
+		else throw new IllegalArgumentException("Khong co nhan vien nao!!!");
+	}
+	
+	
+	
+}

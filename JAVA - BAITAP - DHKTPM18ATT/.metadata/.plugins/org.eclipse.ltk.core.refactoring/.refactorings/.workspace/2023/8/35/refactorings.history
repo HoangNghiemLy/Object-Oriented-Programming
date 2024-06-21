@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;BankAccount&apos; to &apos;DHKTPM18ATT_LT_Tuan04_31_22641571_LyHoangNghiem&apos;" description="Rename resource &apos;BankAccount&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/BankAccount" name="DHKTPM18ATT_LT_Tuan04_31_22641571_LyHoangNghiem" stamp="1693209195088" updateReferences="true"/>
+</session>

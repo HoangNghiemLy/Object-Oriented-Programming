@@ -1,0 +1,28 @@
+package quanlysinhvien.demo;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+
+public class Main {
+
+	public static void main(String[] args) {
+		SinhVien[] sv = {
+			new SinhVien("22641571", "Ly Hoang Nghiem", LocalDate.of(2004, 6, 2), "DHKTPM18ATT", 8.5, GioiTinh.NAM, HeDaoTao.Chinh_Quy),
+			new SinhVien("22641511", "Nguyen Duc Huy", LocalDate.of(2004, 10, 10), "DHHTTT18BTT", 9.8, GioiTinh.NAM, HeDaoTao.Chinh_Quy),
+			new SinhVien("22653111", "Nguyen Van A", LocalDate.of(2004, 8, 2), "DHKHMT18ATT", 7.0, GioiTinh.NAM, HeDaoTao.Chinh_Quy),
+			new SinhVien("22641511", "Tang Nhat Tue", LocalDate.of(2004,9,1), "DHKHDL18B", 9.8, GioiTinh.NAM, HeDaoTao.Chinh_Quy),
+		};
+		DanhSachSinhVien ds= new DanhSachSinhVien(4);
+		ds.addAll(sv);
+		Arrays.stream(ds.getDsSV()).forEach(System.out::println);
+		System.out.println();
+		Arrays.stream(ds.getSVDiemTrungBinhCaoNhat()).forEach(System.out::println);
+		System.out.println();
+		Arrays.stream(ds.getDSSVTheoLop("DHKHDL18B")).forEach(System.out::println);
+		System.out.println();
+		System.out.println("Co tong cong: " +ds.capNhatTenLop("DHKTPM18ATT", "DHHTTT18ATT")+" sinh vien da duoc cap nhat");
+		Arrays.stream(ds.getDsSV()).forEach(System.out::println);
+		System.out.println();
+		System.out.println(ds.timKiemSinhVienTheoMa("22641571"));
+	}
+}

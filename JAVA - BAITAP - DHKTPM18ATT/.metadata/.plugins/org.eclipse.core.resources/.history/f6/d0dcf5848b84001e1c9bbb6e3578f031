@@ -1,0 +1,173 @@
+package bt4;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class QuanLyBanVe {
+	private Queue<KhachHangMuaVe> hangDoiVe;
+	private List<KhachHangMuaVe> dsVeDaBan;
+	
+	public QuanLyBanVe() {
+		hangDoiVe = new LinkedList<>(); //FIFO
+		dsVeDaBan = new ArrayList<>(); //Trùng
+	}
+	
+	/*
+	 * Thêm một khách hàng mới vào hàng đợi mua vé.
+	 */
+	public void themKhachHangVaoHangDoi(KhachHangMuaVe kh) {
+//		Nếu khách chưa từng mua vé
+		if(!hangDoiVe.contains(kh) && !dsVeDaBan.contains(kh))
+			hangDoiVe.add(kh);
+		else if(!hangDoiVe.contains(kh) && dsVeDaBan.contains(kh)) { //Khách đã từng mua vé
+			KhachHangMuaVe temp = dsVeDaBan.get(dsVeDaBan.indexOf(kh));
+			kh.setHoTen(temp.getHoTen());
+			hangDoiVe.add(kh);
+		}
+		else { //Khách hàng đổi ý
+			KhachHangMuaVe temp = timKhachHangDoiVe(kh.getCmnd());
+			temp.setGaDen(kh.getGaDen());
+			temp.setGiaTien(kh.getGiaTien());
+		}
+	}
+
+	/**
+	 * Bán một vé cho khách hàng. Chỉ bán cho người đăng ký trước.
+	 * @return
+	 */
+	public KhachHangMuaVe banVe() {
+		
+		KhachHangMuaVe kh = hangDoiVe.poll();
+		if(kh != null)
+			dsVeDaBan.add(kh);
+		
+		return kh;
+		
+//		if(!hangDoiVe.isEmpty()) {
+//			KhachHangMuaVe kh = hangDoiVe.remove();
+//			return kh;
+//		}
+//		
+//		return null;
+	}
+	
+	/**
+	 * Hiển thị danh sách khách hàng đợi mua vé.
+	 * @return
+	 */
+	public Queue<KhachHangMuaVe> getHangDoiVe() {
+		return hangDoiVe;
+	}
+	
+	/**
+	 * Hủy một khách hàng ra khỏi danh sách (khách hàng không mua vé nữa).
+	 * @param cmnd
+	 * @return
+	 */
+	public boolean huyKhachHang(String cmnd) {
+		KhachHangMuaVe kh = timKhachHangDoiVe(cmnd);
+		if(kh != null)
+			return hangDoiVe.remove(kh);
+		return false;
+	}
+
+	/**
+	 * Tìm khách hàng đợi mua vé khi biết cmnd
+	 * @param cmnd
+	 * @return
+	 */
+	private KhachHangMuaVe timKhachHangDoiVe(String cmnd) {
+		return hangDoiVe.stream()
+				.filter(kh -> kh.getCmnd().equalsIgnoreCase(cmnd))
+				.findFirst()
+				.orElse(null);
+	}
+	
+	/**
+	 * Danh sách vé đã bán
+	 * @return
+	 */
+	public List<KhachHangMuaVe> getDSVeDaBan() {
+		return dsVeDaBan;
+	}
+	
+	/**
+	 * Số khách hàng chờ nhận vé
+	 * @return
+	 */
+	public int getSoKhachChoVe() {
+		return hangDoiVe.size();
+	}
+	
+	/**
+	 * Số vé đã bán
+	 * @return
+	 */
+	public int getSoVeDaBan() {
+		return dsVeDaBan.size();
+	}
+	
+	/**
+	 * Tổng số tiền đã thu về
+	 * @return
+	 */
+	public double tinhTongDoanhThu() {
+		return dsVeDaBan.stream()
+				.mapToDouble(KhachHangMuaVe::getGiaTien)
+				.sum();
+	}
+	
+	/**
+	 * Khách hàng đã mua
+	 * @return
+	 */
+	public int getSoKhachDaMua() {
+		return (int) dsVeDaBan
+				.stream()
+				.map(KhachHangMuaVe::getCmnd)
+				.distinct()
+				.count();
+	}
+	/**
+	 * Danh sách các ga có khách chờ mua vé (không trùng)
+	 * @return
+	 */
+	public Set<String> getDSGaCoKhachCho() {
+		return hangDoiVe.stream()
+				.map(kh -> kh.getGaDen().toUpperCase())
+				.collect(Collectors.toSet());
+	}
+	
+	/**
+	 * Hiển thị danh sách các ga đang chờ mua vé và số vé tương ứng cho ga.
+	 * @return
+	 */
+	public Map<String, Long> getDSGaVaSoKhach() {
+		return hangDoiVe.stream()
+				.collect(Collectors.groupingBy(kh -> kh.getGaDen().toUpperCase(), 
+						Collectors.counting()));
+	}
+	
+	/**
+	 * Việc lưu danh sách: chỉ lưu các khách hàng chờ mua vé. 
+	 */
+	public void luuDSKhachCho() {
+		try(
+				FileWriter file = new FileWriter("data/dskh.txt"); //Character stream
+				PrintWriter out = new PrintWriter(file, true);
+			){
+			hangDoiVe.forEach(kh -> out.println(kh));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+

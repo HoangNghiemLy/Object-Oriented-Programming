@@ -1,0 +1,31 @@
+/*
+ * @ (#)  PayrollApp.java   2023-06    Sep 26, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlynhanvien;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 26, 2023
+ * @time:		 10:25:26 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class PayrollApp {
+	public static void main(String[] args) {
+		Employee[] emps= {
+				new HourlyEmployee("H001", "Morgan, Harry", LocalDate.of(1995, 2, 12), 50, 10.0),
+				new SalariedEmployee("S002", "Linda, Sally", LocalDate.of(1992, 12, 12), 52000),
+		};
+		Arrays.stream(emps).forEach(System.out::println);
+	}
+}

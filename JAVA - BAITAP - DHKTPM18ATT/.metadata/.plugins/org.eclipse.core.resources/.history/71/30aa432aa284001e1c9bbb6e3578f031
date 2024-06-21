@@ -1,0 +1,98 @@
+package bt4;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+	
+	private static final Scanner sc = new Scanner(System.in);
+	private static final DecimalFormat df = new DecimalFormat("#,##0 VND");
+
+	public static void main(String[] args) {
+		QuanLyBanVe ds = new QuanLyBanVe();
+		
+		int chon;
+		
+		do {
+			
+			System.out.println("1. Thêm một khách hàng mới vào hàng đợi mua vé.\r\n"
+					+ "2.  Bán một vé cho khách hàng. Chỉ bán cho người đăng ký trước.\r\n"
+					+ "3.  Hiển thị danh sách khách hàng.\r\n"
+					+ "4.  Hủy một khách hàng ra khỏi danh sách (khách hàng không mua vé nữa).\r\n"
+					+ "5.  Thống kê tình hình bán vé.\r\n"
+					+ "6.  Lưu danh sách vào file.\r\n"
+					+ "7.  Hiển thị danh sách các ga đang chờ mua vé.\r\n"
+					+ "8.  Hiển thị danh sách các ga đang chờ mua vé và số vé tương ứng cho ga.");
+			
+			System.out.println("Chọn: ");
+			chon = sc.nextInt();
+			
+			switch (chon) {
+			case 1 -> {
+				sc.nextLine();
+				ds.themKhachHangVaoHangDoi(nhapKhachHang());
+			}
+			case 2 -> {
+				KhachHangMuaVe kh = ds.banVe();
+				System.out.println("Đã xuất vé: " + kh);
+			}
+			
+			case 3 -> {
+				System.out.println("==Danh sách khách hàng đợi mua vé==");
+				ds.getHangDoiVe()
+				.forEach(kh -> System.out.println(kh));
+				
+				System.out.println("==Danh sách vé đã bán==");
+				ds.getDSVeDaBan()
+				.forEach(kh -> System.out.println(kh));
+			}
+			
+			case 4 -> {
+				sc.nextLine();
+				System.out.println("Nhập cmnd của khách muốn hủy vé");
+				String cmnd = sc.nextLine();
+				boolean kq = ds.huyKhachHang(cmnd);
+				System.out.println(kq);
+			}
+			
+			case 5 -> {
+				System.out.println("Số khách chờ: " + ds.getSoKhachChoVe());
+				System.out.println("Số vé đã bán: " + ds.getSoVeDaBan());
+				System.out.println("Tổng Doanh thu: " + df.format(ds.tinhTongDoanhThu()));
+			}
+			
+			case 6 -> {
+				ds.luuDSKhachCho();
+			}
+			
+			case 7 -> {
+				ds.getDSGaCoKhachCho()
+				.forEach(ga -> System.out.println(ga));
+			}
+			
+			case 8 -> {
+				ds.getDSGaVaSoKhach()
+				.entrySet()
+				.stream()
+				.forEach(entry -> {
+					System.out.print("Ga: " + entry.getKey());
+					System.out.println(", Số khách chờ: "+ entry.getValue());
+				});
+			}
+			}
+			
+		}while(chon > 0);
+	}
+
+	private static KhachHangMuaVe nhapKhachHang() {
+		System.out.println("Nhập CMND: ");
+		String cmnd = sc.nextLine();
+		System.out.println("Nhập họ tên: ");
+		String hoten = sc.nextLine();
+		System.out.println("Nhập Ga đến: ");
+		String gaDen = sc.nextLine();
+		System.out.println("Nhập giá tiền: ");
+		double giaTien = sc.nextDouble();
+		return new KhachHangMuaVe(cmnd, hoten, gaDen, giaTien);
+	}
+}

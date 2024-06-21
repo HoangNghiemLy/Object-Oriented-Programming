@@ -1,0 +1,64 @@
+package quanlysinhvien.demo;
+
+import java.time.LocalDate;
+
+public class SinhVien {
+	private String id;
+	private String hoten;
+	private LocalDate dob;
+	private double diemTB;
+	private String tenLop;
+	public SinhVien() {
+		this("","",LocalDate.now(),0.0,"");
+	}
+	public SinhVien(String id, String hoten, LocalDate dob, double diemTB, String tenLop) {
+		if(id.isBlank())
+			throw new IllegalArgumentException("Ma");
+		this.id = id;
+		this.hoten = hoten;
+		this.dob = dob;
+		this.diemTB = diemTB;
+		this.tenLop = tenLop;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		if(id.isBlank())
+			throw new IllegalArgumentException("Ma");
+		this.id = id;
+	}
+	public String getHoten() {
+		return hoten;
+	}
+	public void setHoten(String hoten) {
+		this.hoten = hoten;
+	}
+	public LocalDate getDob() {
+		return dob;
+	}
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+	public double getDiemTB() {
+		return diemTB;
+	}
+	public void setDiemTB(double diemTB) {
+		this.diemTB = diemTB;
+	}
+	public String getTenLop() {
+		return tenLop;
+	}
+	public void setTenLop(String tenLop) {
+		this.tenLop = tenLop;
+	}
+	@Override
+	public String toString() {
+		return String.format("SinhVien [id=%s, name=%s, ngaySinh=%s, DiemTB=%f, tenLop=%s", this.id,this.hoten,this.dob.getDayOfMonth()+"/"+this.dob.getMonthValue()+"/"+this.dob.getYear(),this.diemTB,this.tenLop);
+	}
+	public String XuLyTen() {
+		String [] abc = this.hoten.split(" ");
+		return abc[abc.length-1];
+	}
+}

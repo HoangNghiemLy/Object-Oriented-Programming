@@ -1,0 +1,67 @@
+/*
+ * @ (#)  HourlyEmployee.java   2023-06    Sep 26, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlynhanvien;
+
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 26, 2023
+ * @time:		 10:16:22 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class HourlyEmployee extends Employee {
+	
+	private  int hoursWorked;
+	private double hourlyWage;
+	public HourlyEmployee(String id, String name, LocalDate dob, int hoursWorked, double hourlyWage) {
+		super(id, name, dob);
+		this.hoursWorked = hoursWorked;
+		this.hourlyWage = hourlyWage;
+	}
+	
+	public HourlyEmployee() {
+		this("","",LocalDate.now(),0,0.0);
+	}
+
+	public int getHoursWorked() {
+		return hoursWorked;
+	}
+
+	public void setHoursWorked(int hoursWorked) {
+		this.hoursWorked = hoursWorked;
+	}
+
+	public double getHourlyWage() {
+		return hourlyWage;
+	}
+
+	public void setHourlyWage(double hourlyWage) {
+		this.hourlyWage = hourlyWage;
+	}
+
+	@Override
+	public double weeklyPay() {
+		if(hoursWorked > 40)
+			return (hoursWorked+(hoursWorked-40)*0.5)*hourlyWage;
+		return hoursWorked * hourlyWage;
+	}
+
+	@Override
+	public String toString() {
+		DecimalFormat df = new DecimalFormat("$ #,##0.00");
+		
+		return super.toString() +String.format("Hours Worked: %-15d\nHourly Wage: %-15s\n",
+				hoursWorked,df.format(hourlyWage)); 
+	}
+}

@@ -1,0 +1,19 @@
+package quanlysinhvien.demo;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+
+public class Tester {
+
+	public static void main(String[] args) {
+		DanhSachSinhVien sv = new DanhSachSinhVien(1);
+		SinhVien[] f = {
+			new SinhVien("SV001", "Ly Hoang Nghiem", LocalDate.of(2004, 6, 2), 9.8, "DHHTTT18BTT"),
+			new SinhVien("SV002", "Nguyen Duc Huy", LocalDate.of(2004, 10, 10), 10, "DHHTTT18BTT"),
+			new SinhVien("SV003", "Duong Chi Viet", LocalDate.of(2004, 8, 02), 6.9, "DHKTPM18ATT"),
+		};
+		sv.addAll(f);
+		Arrays.stream(sv.getDanhSachSinhVien()).forEach(System.out::println);
+		
+	}
+}

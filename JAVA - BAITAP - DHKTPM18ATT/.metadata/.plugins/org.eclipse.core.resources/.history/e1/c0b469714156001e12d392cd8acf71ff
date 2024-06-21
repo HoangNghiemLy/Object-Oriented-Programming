@@ -1,0 +1,89 @@
+/*
+ * @ (#)  Employee.java   2023-06    Sep 18, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package iuh.fit.se;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 18, 2023
+ * @time:		 9:26:39 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public abstract class Employee {
+	String id;
+	String name;
+	LocalDate dob;
+	double salary;
+
+	public Employee() {
+		this.id = "";
+		this.name = "";
+		this.dob = null;
+		this.salary = 0.0;
+
+	}
+
+	public Employee(String id, String name, LocalDate dob, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dob = dob;
+		this.salary = salary;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public double weeklyPay() {
+		return salary / 52;
+	}
+
+	@Override
+	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DecimalFormat salaryFormat = new DecimalFormat("#,###.00");
+		return "Employee ID: " + id + "\n" + "Name: " + name + "\n" + "Date Of Birth: " + dateFormat.format(dob) + "\n"
+				+ "Weekly Pay: $" + salaryFormat.format(weeklyPay());
+	}
+}

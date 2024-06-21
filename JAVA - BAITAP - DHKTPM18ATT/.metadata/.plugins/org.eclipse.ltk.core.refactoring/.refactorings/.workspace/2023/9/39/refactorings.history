@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;iuh.fit.si&apos;" deleteContents="false" description="Delete resource &apos;iuh.fit.si&apos;" element1="/iuh.fit.si" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1695738156640"/>&#x0A;<refactoring comment="Rename resource &apos;iuh.fit.se&apos; to &apos;DHKTPM18ATT_LT_Tuan07_31_22641571_LyHoangNghiem&apos;" description="Rename resource &apos;iuh.fit.se&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/iuh.fit.se" name="DHKTPM18ATT_LT_Tuan07_31_22641571_LyHoangNghiem" stamp="1695738204733" updateReferences="true"/>
+</session>

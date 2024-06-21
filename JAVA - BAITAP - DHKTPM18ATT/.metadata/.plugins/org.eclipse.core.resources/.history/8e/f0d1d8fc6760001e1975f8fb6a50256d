@@ -1,0 +1,203 @@
+/*
+ * @ (#)  PayrollApp.java   2023-06    Sep 26, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlynhanvien;
+
+import java.security.KeyStore.Entry;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 26, 2023
+ * @time:		 10:25:26 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class PayrollApp {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Employee[] emps = { new HourlyEmployee("HE001", "John", LocalDate.of(200, 8, 20), 80, 20.0),
+				new HourlyEmployee("HE002", "Jane", LocalDate.of(2002, 1, 30), 50, 20.0),
+				new Manager("MN101", "Bob", LocalDate.of(1992, 6, 2), 52000.0, 50.0),
+				new SalariedEmployee("SE005", "Alice", LocalDate.of(1999, 5, 10), 52000),
+				new SalariedEmployee("MN102", "David", LocalDate.of(1998, 8, 23), 52000), };
+		EmployeeList list = new EmployeeList();
+		list.addAll(emps);
+		int choice;
+		while (true) {
+			System.out.println("===EMPLOYEE MANAGERMENT SYSTEM");
+			System.out.println("1. Display all employees");
+			System.out.println("2. Add a new employee");
+			System.out.println("3. Search employee by id");
+			System.out.println("4. Sort by weekly salary");
+			System.out.println("5. Remove employee by id");
+			System.out.println("6. Update employee by id");
+			System.out.println("7. List hourly employees who work more than 40 hours a week");
+			System.out.println("8. Print the total weekly salary of all managers");
+			System.out.println("9. Update hourly worked of hourly employee by id");
+			System.out.println("10.List of employees who are young managers (less than 30 years old)");
+			System.out.println("11.This method returns a map of number of employees by year of birth");
+			System.out.println("0. Exit ");
+			System.out.println("Enter your choice: ");
+			choice = sc.nextInt();
+			sc.nextLine();
+			if (choice == 1) {
+				list.getEmployees().forEach(x -> System.out.println(x));
+			} else if (choice == 2) {
+				try {
+					System.out.println("Add a new employee");
+					System.out.println("Enter employee type: ");
+					String type = sc.nextLine();
+					System.out.println("Enter ID: ");
+					String id = sc.nextLine();
+					System.out.println("Enter name: ");
+					String name = sc.nextLine();
+					LocalDate dob = null;
+
+					System.out.println("Day: ");
+					int day = sc.nextInt();
+					System.out.println("Month: ");
+					int month = sc.nextInt();
+					System.out.println("Year: ");
+					int year = sc.nextInt();
+					dob = dob.of(year, month, day);
+
+					if (type.equalsIgnoreCase("Hourly Employee") == true) {
+						System.out.println("Enter hours worked: ");
+						int hourWorked = sc.nextInt();
+						System.out.println("Enter hourly wage: ");
+						double hourlyWage = sc.nextDouble();
+						HourlyEmployee k = new HourlyEmployee(id, name, dob, hourWorked, hourlyWage);
+						if (list.addEmployee(k) == true) {
+							System.out.println("Add success");
+						} else {
+							System.out.println("Add failed");
+						}
+					} else if (type.equalsIgnoreCase("Salaried Employee") == true) {
+						System.out.println("Enter annual salary: ");
+						double annualSalary = sc.nextDouble();
+						SalariedEmployee se = new SalariedEmployee(id, name, dob, annualSalary);
+						if (list.addEmployee(se) == true) {
+							System.out.println("Add success");
+						} else {
+							System.out.println("Add failed");
+						}
+					} else if (type.equalsIgnoreCase("Manager") == true) {
+						System.out.println("Enter annual salary: ");
+						double annualSalary = sc.nextDouble();
+						System.out.println("Enter bonus: ");
+						double bonus = sc.nextDouble();
+						Manager m = new Manager(id, name, dob, annualSalary, bonus);
+						if (list.addEmployee(m) == true) {
+							System.out.println("Add success");
+						} else {
+							System.out.println("Add failed");
+						}
+					}
+
+				} catch (IllegalArgumentException e) {
+					System.out.println("Error");
+				}catch(DateTimeException e) {
+					System.out.println("Error Date");
+				}
+			}else if(choice == 3) {
+				System.out.println("Enter ID you want to find: ");
+				String id = sc.nextLine();
+				Employee e = list.searchEmployeeById(id);
+				if(e != null) {
+					System.out.println(e);
+				}else {
+					System.out.println("No employee by ID");
+				}
+			}else if(choice == 4) {
+				list.sortByWeeklySalary();
+			}else if(choice == 5) {
+				System.out.println("Enter ID you want to remove: ");
+				String id = sc.nextLine();
+				if(list.removeEmployee(id)==true) {
+					System.out.println("Remove employe by id success");
+				}else {
+					System.out.println("Remove failed");
+				}
+			}else if(choice == 6) {
+				System.out.println("Enter ID: ");
+				String id = sc.nextLine();
+				Employee e = list.searchEmployeeById(id);
+				if(e == null) {
+					System.out.println("No employee found by ID");
+				}else {
+					System.out.println("Enter name: ");
+					String name = sc.nextLine();
+					LocalDate dob = null;
+					
+					System.out.println("Day");
+					int day = sc.nextInt();
+					System.out.println("Month");
+					int month= sc.nextInt();
+					System.out.println("Year: ");
+					int year = sc.nextInt();
+					dob = dob.of(year, month, day);
+					
+					if(e instanceof HourlyEmployee) {
+						System.out.println("Enter hours worked: ");
+						int hourWorked = sc.nextInt();
+						System.out.println("Enter hourly wage: ");
+						double hourlyWage = sc.nextDouble();
+						HourlyEmployee he = new HourlyEmployee(id, name, dob, hourWorked, hourlyWage);
+						list.updateEmployee(e);
+					}else if(e instanceof Manager) {
+						System.out.println("Enter annual salary: ");
+						double annualSalary = sc.nextDouble();
+						System.out.println("Enter bonus: ");
+						double bonus = sc.nextDouble();
+						Manager m = new Manager(id, name, dob, annualSalary, bonus);
+						list.updateEmployee(e);
+					}else if(e instanceof SalariedEmployee) {
+						System.out.println("Enter annual salary: ");
+						double annualSalary = sc.nextDouble();
+						SalariedEmployee se = new SalariedEmployee(id, name, dob, annualSalary);
+						list.updateEmployee(e);
+					}
+				}
+			}else if(choice == 7) {
+				
+				
+				
+				
+			}else if(choice == 8) {
+				System.out.println("Total salary of manager: "+list.getWeeklyTotalSalaryOfManager());
+			}else if(choice == 9) {
+				System.out.println("Enter ID: ");
+				String id = sc.nextLine();
+				System.out.println("Enter hour worked: ");
+				int hourWorked = sc.nextInt();
+				list.updateHourlyWorked(id, hourWorked);
+			}else if(choice == 10) {
+				
+				
+				
+				
+			}else if(choice == 11) {
+				list.getNoOfEmployeesByYOB()
+				.entrySet()
+				.forEach(entry -> System.out.println("Year: "+entry.getKey()+ " has "+entry.getValue()+" Employee "));
+			}else if(choice == 0) {
+				System.out.println("End program");
+				break;
+			}else {
+				System.out.println("Error");
+			}
+		}
+		sc.close();
+	}
+}

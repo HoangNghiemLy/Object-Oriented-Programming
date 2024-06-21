@@ -1,0 +1,26 @@
+package quanlysinhvien.demo;
+
+import java.time.LocalDate;
+
+public class SinhVien {
+	private String id;
+	private String hoten;
+	private LocalDate dob;
+	private double diemTB;
+	private String tenLop;
+	public SinhVien() {
+		this("","",LocalDate.now(),0.0,"");
+	}
+	public SinhVien(String id, String hoten, LocalDate dob, double diemTB, String tenLop) {
+		super();
+		this.id = id;
+		this.hoten = hoten;
+		this.dob = dob;
+		this.diemTB = diemTB;
+		this.tenLop = tenLop;
+	}
+	@Override
+	public String toString() {
+		return String.format("SinhVien [id=%s, name=%s, ngaySinh=%s, DiemTB=%f, tenLop=%s", this.hoten,this.hoten,this.dob.getDayOfMonth()+"/"+this.dob.getMonthValue()+"/"+this.dob.getYear(),this.diemTB,this.tenLop);
+	}
+}

@@ -1,0 +1,71 @@
+/*
+ * @ (#)  QuanLyChuyenXe.java   2023-06    Jan 31, 2024
+ *
+ * Copyright (c) 2024  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlycongtydulich.demo;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Jan 31, 2024
+ * @time:		 9:58:59 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class QuanLyChuyenXe {
+	private List<ChuyenXe> dscx;
+	public QuanLyChuyenXe() {
+		this.dscx = new ArrayList<ChuyenXe>();
+	}
+	/*
+	 * Tìm kiếm theo mã số chuyến xe
+	 */
+	public ChuyenXe timKiemChuyenXeTheoMa(String maSoChuyenXe) {
+		return dscx.stream().filter(x -> x.getMaSoChuyenXe().equalsIgnoreCase(maSoChuyenXe)).findFirst().orElse(null);
+	}
+	public double tinhTongDoanhThuChuyenXe() {
+		double tongDoanhThu = dscx.stream().mapToDouble(ChuyenXe::getDoanhThu).sum();
+		return tongDoanhThu;
+	}
+	public double tinhTongDoanhThuNoiThanh() {
+		double tongDTNoiThanh = dscx.stream()
+				.filter(ChuyenXe -> ChuyenXe instanceof ChuyenXeNoiThanh)
+				.mapToDouble(ChuyenXe::getDoanhThu)
+				.sum();
+		return tongDTNoiThanh;
+	}
+	public double tinhTongDoanhThuNgoaiThanh() {
+		double tongDTNgoaiThanh = dscx.stream()
+				.filter(ChuyenXe -> ChuyenXe instanceof ChuyenXeNgoaiThanh)
+				.mapToDouble(ChuyenXe::getDoanhThu)
+				.sum();
+		return tongDTNgoaiThanh;
+	}
+	public void timChuyenXeDTCaoNhat() {
+		ChuyenXe chuyenXeDTCaoNhat = dscx.stream()
+				.max(Comparator.comparing(ChuyenXe::getDoanhThu))
+				.orElse(null);
+		
+	}
+	public void sapXepTheoDoanhThu() {
+		dscx.sort(Comparator.comparing(ChuyenXe::getDoanhThu));
+	}
+	public List<ChuyenXe> getDS(){
+		return dscx;
+	}
+	public boolean themChuyenXe(ChuyenXe cx) {
+		if (timKiemChuyenXeTheoMa(cx.getMaSoChuyenXe())!=null)
+			return false;
+		return dscx.add(cx);
+	}
+}

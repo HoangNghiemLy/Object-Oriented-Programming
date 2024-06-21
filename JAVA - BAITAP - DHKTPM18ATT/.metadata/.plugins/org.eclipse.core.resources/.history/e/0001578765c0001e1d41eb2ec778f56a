@@ -1,0 +1,87 @@
+/*
+ * @ (#)  ChuyenXe.java   2023-06    Jan 31, 2024
+ *
+ * Copyright (c) 2024  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlycongtydulich.demo;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Jan 31, 2024
+ * @time:		 9:31:24 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class ChuyenXe {
+	private String maSoChuyenXe;
+	private String hoTenTaiXe;
+	private String soXe;
+	private double doanhThu;
+	public ChuyenXe() {
+		this("","","",0.0);
+	}
+	public ChuyenXe(String maSoChuyenXe, String hoTenTaiXe, String soXe, double doanhThu) {
+		this.maSoChuyenXe = maSoChuyenXe;
+		this.hoTenTaiXe = hoTenTaiXe;
+		this.soXe = soXe;
+		this.doanhThu = doanhThu;
+	}
+	public String getMaSoChuyenXe() {
+		return maSoChuyenXe;
+	}
+	public void setMaSoChuyenXe(String maSoChuyenXe) {
+		this.maSoChuyenXe = maSoChuyenXe;
+	}
+	public String getHoTenTaiXe() {
+		return hoTenTaiXe;
+	}
+	public void setHoTenTaiXe(String hoTenTaiXe) {
+		this.hoTenTaiXe = hoTenTaiXe;
+	}
+	public String getSoXe() {
+		return soXe;
+	}
+	public void setSoXe(String soXe) {
+		this.soXe = soXe;
+	}
+	public double getDoanhThu() {
+		return doanhThu;
+	}
+	public void setDoanhThu(double doanhThu) {
+		this.doanhThu = doanhThu;
+	}
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+" [ma So Chuyen Xe= " + maSoChuyenXe + ", ho Ten Tai Xe= " + hoTenTaiXe + ", so Xe= " + soXe
+				+ ", doanh Thu= " + doanhThu + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((maSoChuyenXe == null) ? 0 : maSoChuyenXe.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+		ChuyenXe other = (ChuyenXe) obj;
+		if (maSoChuyenXe == null) {
+			if (other.maSoChuyenXe != null)
+				return false;
+		} else if (!maSoChuyenXe.equals(other.maSoChuyenXe))
+			return false;
+		return true;
+	}
+	
+}

@@ -1,0 +1,44 @@
+package dictionary;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Dictionary d = new Dictionary();
+//		d.addWord("Dog", "con cho");
+//		d.addWord("cat", "Con meo");
+//		d.addWord("Car", "xe o to");
+//		d.addWord("abc", "Con meo");
+//		System.out.println();
+//		
+//		d.updateWord("abc", "con cho");
+//		System.out.println(d.searchWord("cat"));
+//		
+//		d.showAll();
+	
+		do {
+		 
+			System.out.println("===DICTIONARY===");
+			System.out.println("1. Add new word");
+			System.out.println("2. Update word");
+			System.out.println("3. Delete word");
+			System.out.println("4. Search word");
+			System.out.println("5. Show all word");
+			System.out.println("0. Exit");
+			System.out.println("Enter your choice: ");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			if(choice == 1) {
+				System.out.println("Enter new word: ");
+				String newWord = sc.nextLine();
+				System.out.println("Enter new mean of word: ");
+				String newMean = sc.nextLine();
+				d.addWord(newWord, newMean);
+			}
+		}while(true);
+	}
+	
+	
+
+}

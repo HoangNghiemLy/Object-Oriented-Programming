@@ -1,0 +1,82 @@
+package project_quanlysinhvien.demo;
+
+import java.time.LocalDate;
+
+public class SinhVien {
+
+	private String mssv;
+	private String name;
+	private LocalDate ngaysinh;
+	private double diemtb;
+	private GioiTinh gioitinh;
+	private HeDaoTao hedaotao;
+	private String tenLop;
+	public SinhVien() {
+		this("","",LocalDate.now(),0.0,null,null,"");
+	}
+	public SinhVien(String mssv, String name, LocalDate ngaysinh, double diemtb, GioiTinh gioitinh, HeDaoTao hedaotao, String tenLop) {
+		if(mssv.trim().equals("")==true && mssv.isBlank() && mssv.length()<9)
+			throw new IllegalArgumentException("Ma so sinh vien khong duoc bo trong va phai du 8 chu so");
+		this.mssv = mssv;
+		this.name = name;
+		this.ngaysinh = ngaysinh;
+		if(diemtb<0 || diemtb>10)
+			throw new IllegalArgumentException("Diem trung binh phai nam tu 0 den 10");
+		this.diemtb = diemtb;
+		this.gioitinh = gioitinh;
+		this.hedaotao = hedaotao;
+		this.tenLop = tenLop;
+	}
+	public String getMssv() {
+		return mssv;
+	}
+	public void setMssv(String mssv) {
+		if(mssv.trim().equals("")==true || mssv.isBlank())
+			throw new IllegalArgumentException("Ma so sinh vien khong duoc bo trong va phai du 8 chu so ");
+		this.mssv = mssv;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public LocalDate getNgaysinh() {
+		return ngaysinh;
+	}
+	public void setNgaysinh(LocalDate ngaysinh) {
+		this.ngaysinh = ngaysinh;
+	}
+	public double getDiemtb() {
+		return diemtb;
+	}
+	public void setDiemtb(double diemtb) {
+		if(diemtb<0 || diemtb>10)
+			throw new IllegalArgumentException("Diem trung binh phai nam tu 0 den 10");
+		this.diemtb = diemtb;
+	}
+	public GioiTinh getGioitinh() {
+		return gioitinh;
+	}
+	public void setGioitinh(GioiTinh gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+	public HeDaoTao getHedaotao() {
+		return hedaotao;
+	}
+	public void setHedaotao(HeDaoTao hedaotao) {
+		this.hedaotao = hedaotao;
+	}
+	
+	public String getTenLop() {
+		return tenLop;
+	}
+	public void setTenLop(String tenLop) {
+		this.tenLop = tenLop;
+	}
+	@Override
+	public String toString() {
+		return String.format("SinhVien [mssv=%s, ténSV=%s, NgaySinh=%s, DiemTB=%f, GioiTinh=%s, HeDaoTao=%s, TenLop=%s", 
+				this.mssv,this.name,this.ngaysinh.getDayOfMonth()+"/"+this.ngaysinh.getMonthValue()+"/"+this.ngaysinh.getYear(),this.diemtb,this.gioitinh,this.hedaotao, this.tenLop);
+	}
+}

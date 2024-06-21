@@ -1,0 +1,8 @@
+package quanlysinhvien.demo;
+
+public class DanhSachSinhVien {
+	private SinhVien[] dsSV;
+	private int n;
+	
+
+}

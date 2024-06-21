@@ -1,0 +1,21 @@
+1, Tran Van Thao, 23, 250, 2, WebA
+2, Le Anh Kiet, 22, 200, 1, DesktopA
+3, Le Dao Tan Thanh, 24, 500, 5, WebA, 0.3
+4, Nguyen Ho Quan, 23, 250, 3, DesktopA
+5, Le Duy An, 25, 310, 5, MobileA
+6, Nguyen Phan An, 26, 550, 5, DesktopA, 0.31
+7, Tran Khanh Duy, 24, 250, Administrative Tester
+8, Le Thi Ngoc Anh, 31, 400, Administrative Tester
+9, Tran Thi Khanh Tam, 24, 250, 3, DesktopA
+10, Ho Dang Thang, 24, 300, 3, WebA
+11, Tran Duy An, 28, 340, 6, MobileA
+12, Ngo Diem Hue, 23, 240, Functional Tester
+13, Tran Le Minh Tien, 22, 250, Non-Functional Tester
+14, Le Van Viet, 25, 290, 3, WebA
+15, Tran Quoc Anh, 30, 340, Non-Functional Tester
+16, Le Viet An, 27, 340, 5, DesktopA
+17, Nguyen Huy Dong, 25, 300, Functional Tester
+18, Tran Van Hoi, 30, 350, 5, MobileA
+19, Nguyen Khanh Duy, 35, 500, 7, MobileA, 0.25
+20, Tran Khanh Huyen, 29, 310, 4, MobileA
+21, Tran Van Thang, 24, 250, 2, WebA

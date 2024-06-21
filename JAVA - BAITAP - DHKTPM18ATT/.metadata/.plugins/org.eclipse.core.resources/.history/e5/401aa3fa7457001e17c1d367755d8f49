@@ -1,0 +1,51 @@
+/*
+ * @ (#)  PayrollApp.java   2023-06    Sep 19, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package iuh.fit.se;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Sep 19, 2023
+ * @time:		 9:06:03 PM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class PayrollApp {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n;
+		do {
+			System.out.println("Nhap so luong nhan vien: ");
+			n = sc.nextInt();
+		}while(n<=0);
+		EmployeeList listemp = new EmployeeList(n);
+		while(true) {
+			System.out.println("EMPLOYEE MANAGERMENT SYSTEM");
+			System.out.println("1. Display all employees" + "\n2. Add a new employee" + "\n3. Search employee by ID" + "\n4. Sort by weekly salary" + 
+								"\n5. Remove employee by ID" + "\n6. Update employee by ID" + "\n7. List hourly employees who work more than 40 hours a week" +
+								"\n8. Prin the total weekly salary of all managers" + "\n9. Update hourly worked of hourly employee by ID" + "\n10. List of employees who are young managers (less than 30 years old"+ 
+								"\n0. Exit"+" \nEnter your choice: ");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			if(choice == 1) {
+				for(int i = 0 ;i <listemp.getCurrentSize() ;i++) {
+					System.out.println(listemp.getEmployees()[i].toString());
+				}
+			}
+		}
+		
+		
+	}
+
+}

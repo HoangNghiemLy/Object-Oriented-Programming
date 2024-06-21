@@ -1,0 +1,37 @@
+package iuh.fit.se;
+
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		DanhSachPhongHoc list = new DanhSachPhongHoc();
+		list.themPhongHoc(new PhongLyThuyet("A01", "A", 100, 10, true));
+		list.themPhongHoc(new PhongLyThuyet("A02", "A", 150, 15, false));
+		list.themPhongHoc(new PhongLyThuyet("A03", "A", 200, 15, true));
+		list.themPhongHoc(new PhongLyThuyet("A04", "A", 50, 10, false));
+		list.themPhongHoc(new PhongMayTinh("B01", "B", 200, 10, 20));
+		list.themPhongHoc(new PhongMayTinh("B02", "B", 150, 15, 50));
+		list.themPhongHoc(new PhongMayTinh("B03", "B", 100, 10, 25));
+		list.themPhongHoc(new PhongMayTinh("B04", "B", 250, 20, 30));
+		list.themPhongHoc(new PhongThiNghiem("C01", "C", 200, 10,"Ki thuat hoa hoc", 150,true));
+		list.themPhongHoc(new PhongThiNghiem("C02", "C", 150, 15,"Ki thuat hoa hoc", 25,false));
+		list.themPhongHoc(new PhongThiNghiem("C03", "C", 100, 5,"Ki thuat hoa hoc", 30,true));
+		list.themPhongHoc(new PhongThiNghiem("C04", "C", 250, 20,"Ki thuat hoa hoc", 20,true));
+//		System.out.println("Danh sach tat ca phong hoc");
+//		list.getDs().forEach(ph -> System.out.println(ph));
+//		System.out.println("So luong phong hoc: " + list.inTongSoPhongHoc());
+	
+//		list.capNhatSoMayTinh("B03", 30);
+//		System.out.println("Sau khi cap nhật");
+//		list.getDs().forEach(ph -> System.out.println(ph));
+//		
+//		System.out.println("Danh sách phòng đạt chuẩn: ");
+//		list.inDanhSachPhongHocDatChuan()
+//		.forEach(x -> System.out.println(x));
+//		list.sapXepTheoSoBongDen();
+		
+		List<PhongHoc> ph = list.getDSPhongMayTinh(60);
+		System.out.println(ph);
+	}
+	
+}

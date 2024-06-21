@@ -1,0 +1,21 @@
+1, Tran Van Thao, 23, 2500000, 04/02/2023, 2, WebA
+2, Le Anh Kiet, 22, 2000000, 23/03/2023, 1, DesktopA
+3, Le Dao Tan Thanh, 24, 5000000, 01/11/2022, 5, WebA, 0.3
+4, Nguyen Ho Quan, 23, 2500000, 11/01/2023, 3, DesktopA
+5, Le Duy An, 25, 3100000, 10/11/2022, 5, MobileA
+6, Nguyen Phan An, 26, 5500000, 14/11/2022, 5, DesktopA, 0.31
+7, Tran Khanh Duy, 24, 2500000, 14/11/2022, Administrative Tester
+8, Le Thi Ngoc Anh, 31, 4000000, 14/11/2022, Administrative Tester
+9, Tran Thi Khanh Tam, 24, 2500000, 05/01/2023, 3, DesktopA
+10, Ho Dang Thang, 24, 3000000, 09/01/2023, 3, WebA
+11, Tran Duy An, 28, 3400000, 11/10/2022, 6, MobileA
+12, Ngo Diem Hue, 23, 2400000, 14/11/2022, Functional Tester
+13, Tran Le Minh Tien, 22, 2500000, 14/11/2022, Non-Functional Tester
+14, Le Van Viet, 25, 2900000, 16/01/2023, 3, WebA
+15, Tran Quoc Anh, 30, 3400000, 14/11/2022, Non-Functional Tester
+16, Le Viet An, 27, 3400000, 15/11/2022, 5, DesktopA
+17, Nguyen Huy Dong, 25, 3000000, 14/11/2022, Functional Tester
+18, Tran Van Hoi, 30, 3500000, 27/11/2022, 5, MobileA
+19, Nguyen Khanh Duy, 35, 5000000, 19/09/2022, 7, MobileA, 0.25
+20, Tran Khanh Huyen, 29, 3100000, 01/12/2022, 4, MobileA
+21, Tran Van Thang, 24, 2500000, 24/02/2023, 2, WebA

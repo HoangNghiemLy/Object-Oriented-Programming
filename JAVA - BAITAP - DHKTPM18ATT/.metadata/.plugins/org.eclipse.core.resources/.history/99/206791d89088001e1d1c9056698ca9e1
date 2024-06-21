@@ -1,0 +1,39 @@
+/*
+ * @ (#)  Test.java   2023-06    Nov 22, 2023
+ *
+ * Copyright (c) 2023  IUH. All rights reserved.
+ * Ho Chi Minh City
+ */
+
+package quanlynhanviennhahang.demo;
+
+/*
+ * @description:
+ * @author:  	 Hoang Nghiem Ly
+ * @work at:	 IUH
+ * @date:    	 Nov 22, 2023
+ * @time:		 12:04:23 AM
+ * @verison: 	 2023-06
+ * @location:    Ho Chi Minh City
+ */
+
+public class Test {
+	public static void main(String[] args) {
+		DanhSachNhanVien list = new DanhSachNhanVien();
+		list.themNhanVien(new NhanVienBanHang("01", "A", "013230412", 1800000.0, 5000000));
+		list.themNhanVien(new NhanVienBanHang("02", "B", "013230412", 1800000.0, 15000000.0)); 
+		list.themNhanVien(new NhanVienBanHang("03", "C", "013230412", 1800000.0, 10000000.0));
+		list.themNhanVien(new NhanVienBanHang("04", "D", "013230412", 1800000.0, 20000000.0));
+		list.themNhanVien(new NhanVienBanHang("05", "E", "013230412", 1800000.0, 5000000.0));
+		
+		list.themNhanVien(new NhanVienVanPhong("06", "FA", "01230123", 1800000.0, 2.5));
+		list.themNhanVien(new NhanVienVanPhong("07", "FA", "01230123", 1800000.0, 8.96));
+		list.themNhanVien(new NhanVienVanPhong("08", "FA", "01230123", 1800000.0, 1.96));
+		list.themNhanVien(new NhanVienVanPhong("09", "FA", "01230123", 1800000.0, 2.5));
+		list.themNhanVien(new NhanVienVanPhong("011", "FA", "01230123", 1800000.0, 3.25));
+		
+		list.getDS().forEach(p -> System.out.println(p));
+		list.thongKeLuongTrungBinh().entrySet().forEach(p -> System.out.println(p));
+	}
+
+}
